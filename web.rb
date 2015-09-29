@@ -17,6 +17,7 @@ post '/webhook/staging' do
   uri = URI.parse "https://everydayhero-staging.com/integrations/strava/webhooks/"
 
   http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
   r = Net::HTTP::Post.new(uri.request_uri)
   b = request.body.read
   puts b.inspect
@@ -41,6 +42,7 @@ post '/webhook/production' do
   uri = URI.parse "https://everydayhero.com/integrations/strava/webhooks/"
 
   http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
   r = Net::HTTP::Post.new(uri.request_uri)
   b = request.body.read
   puts b.inspect
