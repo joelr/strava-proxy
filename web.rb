@@ -1,6 +1,9 @@
 require 'sinatra'
 require 'net/http'
 
+$stdout.sync = true
+
+
 get '/webhook/staging' do
     uri = URI.parse "https://everydayhero-staging.com/integrations/strava/webhooks/"
     uri.query = "hub.challenge=" + params["hub.challenge"]
@@ -15,7 +18,10 @@ post '/webhook/staging' do
 
   http = Net::HTTP.new(uri.host, uri.port)
   r = Net::HTTP::Post.new(uri.request_uri)
-  r.body = request.body.read
+  b = request.body.read
+  puts b.inspect
+  puts request.inspect
+  r.body = b
   r["Content-Type"] = "application/json"
 
   http.request(r)
@@ -36,7 +42,10 @@ post '/webhook/production' do
 
   http = Net::HTTP.new(uri.host, uri.port)
   r = Net::HTTP::Post.new(uri.request_uri)
-  r.body = request.body.read
+  b = request.body.read
+  puts b.inspect
+  puts request.inspect
+  r.body = b
   r["Content-Type"] = "application/json"
 
   http.request(r)
