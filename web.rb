@@ -6,7 +6,7 @@ $stdout.sync = true
 
 get '/webhook/staging' do
     uri = URI.parse "https://everydayhero-staging.com/integrations/strava/webhooks/"
-    uri.query = "hub.challenge=" + params["hub.challenge"]
+    uri.query = "hub.challenge=" + params["hub.challenge"].to_s
 
     content_type 'application/json', :charset => 'utf-8'
 
@@ -31,7 +31,7 @@ end
 
 get '/webhook/production' do
     uri = URI.parse "https://everydayhero.com/integrations/strava/webhooks/"
-    uri.query = "hub.challenge=" + params["hub.challenge"]
+    uri.query = "hub.challenge=" + params["hub.challenge"].to_s
 
     content_type 'application/json', :charset => 'utf-8'
 
