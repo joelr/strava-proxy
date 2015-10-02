@@ -19,10 +19,7 @@ post '/webhook/staging' do
   http = Net::HTTP.new(uri.host, uri.port)
   http.use_ssl = true
   r = Net::HTTP::Post.new(uri.request_uri)
-  b = request.body.read
-  puts b.inspect
-  puts request.inspect
-  r.body = b
+  r.body = request.body.read
   r["Content-Type"] = "application/json"
 
   http.request(r)
@@ -44,10 +41,7 @@ post '/webhook/production' do
   http = Net::HTTP.new(uri.host, uri.port)
   http.use_ssl = true
   r = Net::HTTP::Post.new(uri.request_uri)
-  b = request.body.read
-  puts b.inspect
-  puts request.inspect
-  r.body = b
+  r.body = request.body.read
   r["Content-Type"] = "application/json"
 
   http.request(r)
